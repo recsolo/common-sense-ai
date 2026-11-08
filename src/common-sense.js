@@ -5,7 +5,7 @@
   root.CommonSense = root.CommonSense || {};
   var CS = root.CommonSense;
 
-  CS.VERSION = '0.1.0';
+  CS.VERSION = '0.3.0';
 
   // Optional LLM adapter (see src/adapters/llm.js). Null means the
   // rule-based interpreter runs on its own.
