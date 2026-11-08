@@ -41,13 +41,21 @@
 
   // Learn from an answer to a clarifying question.
   // slot is the missing slot the question was about (e.g. 'topic', 'time').
+  // Maps each slot to the right kind of learning: a platform answer becomes
+  // a preference, a topic becomes an interest, a person is stored as a
+  // contact (name:role), and anything else is stored as a fact.
   CS.learnFromAnswer = function (profile, slot, answer) {
     if (!answer) return { profile: profile, note: '' };
-    var knownSlots = ['topic', 'platform', 'person', 'time', 'task', 'event', 'item'];
-    if (knownSlots.indexOf(slot) === -1) {
-      return CS.learn(profile, { type: 'fact', key: slot, value: answer });
-    }
-    return CS.learn(profile, { type: 'fact', key: slot, value: answer });
+    var MAP = {
+      platform: function (v) { return { type: 'preference', key: 'defaultPlatform', value: v }; },
+      topic: function (v) { return { type: 'interest', value: v }; },
+      person: function (v) {
+        var p = v.split(':');
+        return { type: 'person', key: p[0].trim(), value: (p[1] || 'contact').trim() };
+      }
+    };
+    var builder = MAP[slot];
+    return CS.learn(profile, builder ? builder(answer) : { type: 'fact', key: slot, value: answer });
   };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
 

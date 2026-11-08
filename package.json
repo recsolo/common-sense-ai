@@ -1,0 +1,1 @@
+{"engines":{"node":">=18"},"exports":{".":"./index.js"},"license":"MIT","main":"index.js","name":"common-sense-ai","scripts":{"test":"node --test tests/**/*.mjs"},"version":"0.1.0"}

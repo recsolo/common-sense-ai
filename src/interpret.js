@@ -104,10 +104,15 @@
     return null;
   }
 
+  function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   function stripWords(text, words) {
     var out = text;
     words.forEach(function (w) {
-      out = out.replace(new RegExp('\\b' + w + '\\b', 'gi'), ' ');
+      if (!w) return;
+      out = out.replace(new RegExp('\\b' + escapeRegex(w) + '\\b', 'gi'), ' ');
     });
     return out.replace(/\s+/g, ' ').trim();
   }
