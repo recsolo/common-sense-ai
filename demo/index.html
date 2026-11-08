@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common Sense AI — Demo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Common Sense AI</h1>
+  <p class="sub">Say it vague. Watch what it understands — and what it asks.</p>
+  <p class="proto">Prototype — rule-based interpreter, no model, no keys, nothing leaves your browser.</p>
+</header>
+
+<main>
+  <section class="card" id="try">
+    <h2>Try it</h2>
+    <label for="input">Say something vague</label>
+    <div class="row">
+      <input id="input" type="text" placeholder="post bears content" autocomplete="off">
+      <button id="go">Understand</button>
+    </div>
+    <div class="chips" id="chips"></div>
+
+    <div id="result" class="result hidden">
+      <div class="line"><span class="k">Intent</span><span id="r-intent" class="badge"></span></div>
+      <div class="line"><span class="k">Confidence</span><span id="r-conf"></span></div>
+      <div class="line"><span class="k">Understood as</span><span id="r-action"></span></div>
+      <div class="line"><span class="k">Slots</span><span id="r-slots"></span></div>
+      <div class="line"><span class="k">Assumptions</span><span id="r-assume"></span></div>
+      <div id="q-box" class="qbox hidden">
+        <p class="q" id="r-question"></p>
+        <div class="row">
+          <input id="answer" type="text" placeholder="Your answer…" autocomplete="off">
+          <button id="answer-go">Teach it</button>
+        </div>
+        <div class="chips" id="quick"></div>
+        <p class="note" id="learn-note"></p>
+      </div>
+      <button id="copy" class="ghost">Copy result</button>
+    </div>
+  </section>
+
+  <section class="card" id="context">
+    <h2>Your context</h2>
+    <p class="hint">This is what the layer fills gaps from. Edit it, save, and try the same vague instruction again.</p>
+    <label for="p-name">Name</label>
+    <input id="p-name" type="text">
+    <label for="p-interests">Interests (comma-separated)</label>
+    <input id="p-interests" type="text">
+    <label for="p-projects">Projects (comma-separated)</label>
+    <input id="p-projects" type="text">
+    <label for="p-people">People (one per line: Name: relationship)</label>
+    <textarea id="p-people" rows="3"></textarea>
+    <label for="p-platform">Default platform</label>
+    <select id="p-platform">
+      <option>X</option><option>Instagram</option><option>Facebook</option><option>Pinterest</option>
+    </select>
+    <label for="p-tone">Tone</label>
+    <select id="p-tone">
+      <option>funny</option><option>warm</option><option>plain</option><option>hype</option>
+    </select>
+    <label for="p-routines">Routines (one per line)</label>
+    <textarea id="p-routines" rows="2"></textarea>
+    <div class="row">
+      <button id="save-profile">Save context</button>
+      <button id="reset-profile" class="ghost">Reset</button>
+    </div>
+    <h3>What it learned</h3>
+    <ul id="facts" class="facts"></ul>
+    <p class="hint">Read the code: <a href="../README.md">README</a> · <a href="../docs/ARCHITECTURE.md">Architecture</a> · <a href="../examples/vague-instructions.md">Examples</a></p>
+  </section>
+</main>
+
+<footer>
+  <p>Open source (MIT) — <a href="https://github.com/recsolo/common-sense-ai">github.com/recsolo/common-sense-ai</a>. Built to be built on.</p>
+</footer>
+
+<script src="../src/common-sense.js"></script>
+<script src="../src/context.js"></script>
+<script src="../src/clarify.js"></script>
+<script src="../src/interpret.js"></script>
+<script src="../src/learn.js"></script>
+<script src="../src/adapters/llm.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
